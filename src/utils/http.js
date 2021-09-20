@@ -31,7 +31,7 @@ exports.get = (url, options) => exports.http(url, { ...options, method: 'GET' })
 exports.getHTTPVersion = (url) => {
   return new Promise((resolve) => {
     try {
-      const output = execSync(`curl --head -k -s --max-time 3 ${url}`, { encoding: 'utf8' });
+      const output = execSync(`curl --head -k -s --max-time 3 "${url.split(/\s+/)[0]}"`, { encoding: 'utf8' });
       const mathed = output.match(/^(HTTP\/[0-9.]+)\s\d+/i);
       resolve(mathed ? mathed[1].toUpperCase() : null);
     } catch (e) {
